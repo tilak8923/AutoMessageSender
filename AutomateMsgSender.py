@@ -1,6 +1,15 @@
+import sys
 import pyautogui
 import pyperclip
 import time
+
+# it automatically detects the paste hotkey based on the platform
+if sys.platform == "darwin":
+    paste_hotkey = ["command", "v"]
+elif sys.platform == "win32":
+    paste_hotkey = ["ctrl", "v"]
+else:
+    paste_hotkey = ["ctrl", "v"]
 
 def send_messages_from_file(file_path, text, count):
     delay=1
@@ -21,7 +30,7 @@ def send_messages_from_file(file_path, text, count):
             pyperclip.copy(full_text)  
             time.sleep(0.1)  
 
-            pyautogui.hotkey("command", "v")  
+            pyautogui.hotkey(*paste_hotkey)
             pyautogui.press("enter")  
             time.sleep(delay)  
 
@@ -39,7 +48,6 @@ def send_messages_from_file(file_path, text, count):
 data = [
     {"file": "file1.txt", "text": "hello_world"},
     {"file": "file2.txt", "text": "https://example.com"},
-    {"file": "file3.txt", "text": ""},
 ]   
 # you can add more files and links as needed
 
