@@ -1,0 +1,2 @@
+Add the content that you want to send 
+each line send as an message on whatsapp or other chat interfaces with the added text

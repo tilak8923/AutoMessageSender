@@ -2,12 +2,12 @@ import pyautogui
 import pyperclip
 import time
 
-def send_messages_from_file(file_path, link, count):
+def send_messages_from_file(file_path, text, count):
     delay=1
     try:
-        # File se messages read karo
+        # Read msgs from file
         with open(file_path, "r") as file:
-            messages = [line.strip() for line in file if line.strip()]  # Blank lines ignore karo
+            messages = [line.strip() for line in file if line.strip()]  # for ignoring blank lines
             print("Messages Read from File:", messages)
         if not messages:
             print(f"No messages found in {file_path}.")
@@ -35,12 +35,15 @@ def send_messages_from_file(file_path, link, count):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-file = "file.txt"
-# You Can Add more files here
+# provide the name of the files and texts(optional you can leave it blank) in a list of dictionaries
+data = [
+    {"file": "file1.txt", "text": "hello_world"},
+    {"file": "file2.txt", "text": "https://example.com"},
+    {"file": "file3.txt", "text": ""},
+]   
+# you can add more files and links as needed
 
-
-text = ""
-# text that you want to send with each message , let it be empty if you don't want to send any text 
-
-
-send_messages_from_file(file, text , 1)
+# Iterate through the list of dictionaries and call sendMsg for each item
+for i, item in enumerate(data, start=1):
+    send_messages_from_file(item["file"], item["text"], i)
+    print(f"Finished processing {item['file']}.")
